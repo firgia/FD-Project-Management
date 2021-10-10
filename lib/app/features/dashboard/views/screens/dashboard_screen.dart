@@ -13,7 +13,6 @@ part '../../controllers/dashboard_controller.dart';
 // model
 
 // component
-part '../components/login_button.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -24,9 +23,15 @@ class DashboardScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const HeaderText("dashboard"),
-            const SizedBox(height: 10),
-            _LoginButton(onPressed: () {}),
+            const Spacer(),
+            ElevatedButton(onPressed: () {}, child: const Text("button")),
+            const Card(
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: HeaderText("dashboard"),
+              ),
+            ),
+            const Spacer(),
           ],
         ),
       ),
