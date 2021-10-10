@@ -1,5 +1,8 @@
 library dashboard;
 
+import 'package:project_management/app/shared_components/task_card.dart';
+import 'package:project_management/app/utils/helpers/app_helpers.dart';
+
 import '../../../../shared_components/header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,16 +25,16 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          children: [
-            const Spacer(),
-            ElevatedButton(onPressed: () {}, child: const Text("button")),
-            const Card(
+          children: const [
+            Spacer(),
+            TaskCard(type: TaskType.inProgress),
+            Card(
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: HeaderText("dashboard"),
               ),
             ),
-            const Spacer(),
+            Spacer(),
           ],
         ),
       ),
