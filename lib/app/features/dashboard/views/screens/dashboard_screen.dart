@@ -27,7 +27,9 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           children: const [
             Spacer(),
+            TaskCard(type: TaskType.todo),
             TaskCard(type: TaskType.inProgress),
+            TaskCard(type: TaskType.done),
             Card(
               child: Padding(
                 padding: EdgeInsets.all(20),

@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_management/app/constans/app_constants.dart';
@@ -17,16 +18,37 @@ class TaskCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(kBorderRadius),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5),
               child: _Tile(
-                dotColor: Colors.red,
+                dotColor: type.getColor(),
                 title: "Landing page UI Design",
                 subtitle: "Due in 6 days",
                 onPressedMore: () {},
               ),
             ),
+            const SizedBox(height: kSpacing),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
+              child: Row(
+                children: [
+                  _IconButton(
+                    iconData: EvaIcons.messageCircleOutline,
+                    onPressed: () {},
+                    totalContributor: 12,
+                  ),
+                  const SizedBox(width: kSpacing / 2),
+                  _IconButton(
+                    iconData: EvaIcons.peopleOutline,
+                    onPressed: () {},
+                    totalContributor: 12,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: kSpacing / 2),
           ],
         ),
       ),
@@ -60,7 +82,7 @@ class _Tile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _dot(Colors.redAccent),
+              _dot(dotColor),
               const SizedBox(width: 8),
               Expanded(child: _title(title)),
               _moreButton(onPressed: onPressedMore),
@@ -86,9 +108,7 @@ class _Tile extends StatelessWidget {
   Widget _title(String data) {
     return Text(
       data,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+      style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: .7),
       textAlign: TextAlign.left,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
@@ -111,6 +131,53 @@ class _Tile extends StatelessWidget {
       onPressed: onPressed,
       icon: const Icon(Icons.more_vert_rounded),
       splashRadius: 20,
+    );
+  }
+}
+
+class _IconButton extends StatelessWidget {
+  const _IconButton({
+    required this.iconData,
+    required this.totalContributor,
+    required this.onPressed,
+    Key? key,
+  }) : super(key: key);
+
+  final IconData iconData;
+  final int totalContributor;
+  final Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.transparent,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(kBorderRadius),
+        ),
+      ),
+      onPressed: onPressed,
+      icon: _icon(iconData),
+      label: _label("$totalContributor"),
+    );
+  }
+
+  Widget _label(String data) {
+    return Text(
+      data,
+      style: const TextStyle(
+        color: Colors.white54,
+        fontSize: 10,
+      ),
+    );
+  }
+
+  Widget _icon(IconData iconData) {
+    return Icon(
+      iconData,
+      color: Colors.white54,
+      size: 14,
     );
   }
 }
