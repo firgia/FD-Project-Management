@@ -6,13 +6,30 @@ import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({
+    required this.title,
+    required this.dueDay,
+    required this.totalComents,
+    required this.totalContributors,
     required this.type,
     required this.profilContributors,
+    required this.onPressedMore,
+    required this.onPressedTask,
+    required this.onPressedContributors,
+    required this.onPressedComments,
     Key? key,
   }) : super(key: key);
 
+  final String title;
+  final int dueDay;
   final List<ImageProvider> profilContributors;
   final TaskType type;
+  final int totalComents;
+  final int totalContributors;
+
+  final Function() onPressedMore;
+  final Function() onPressedTask;
+  final Function() onPressedContributors;
+  final Function() onPressedComments;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +46,11 @@ class TaskCard extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               child: _Tile(
                 dotColor: type.getColor(),
-                title: "Landing page UI Design",
-                subtitle: "Due in 6 days",
-                onPressedMore: () {},
+                title: title,
+                subtitle: (dueDay < 0)
+                    ? "Late in ${dueDay * -1} days"
+                    : "Due in " + ((dueDay > 1) ? "$dueDay days" : "today"),
+                onPressedMore: onPressedMore,
               ),
             ),
             const SizedBox(height: kSpacing),
@@ -48,14 +67,14 @@ class TaskCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: onPressedTask,
                     child: Text(
                       type.toStringValue(),
                     ),
                   ),
                   _ListProfilImage(
                     images: profilContributors,
-                    onPressed: () {},
+                    onPressed: onPressedContributors,
                   ),
                 ],
               ),
@@ -67,14 +86,14 @@ class TaskCard extends StatelessWidget {
                 children: [
                   _IconButton(
                     iconData: EvaIcons.messageCircleOutline,
-                    onPressed: () {},
-                    totalContributor: 12,
+                    onPressed: onPressedComments,
+                    totalContributors: totalComents,
                   ),
                   const SizedBox(width: kSpacing / 2),
                   _IconButton(
                     iconData: EvaIcons.peopleOutline,
-                    onPressed: () {},
-                    totalContributor: 12,
+                    onPressed: onPressedContributors,
+                    totalContributors: totalContributors,
                   ),
                 ],
               ),
@@ -169,13 +188,13 @@ class _Tile extends StatelessWidget {
 class _IconButton extends StatelessWidget {
   const _IconButton({
     required this.iconData,
-    required this.totalContributor,
+    required this.totalContributors,
     required this.onPressed,
     Key? key,
   }) : super(key: key);
 
   final IconData iconData;
-  final int totalContributor;
+  final int totalContributors;
   final Function() onPressed;
 
   @override
@@ -190,7 +209,7 @@ class _IconButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       icon: _icon(iconData),
-      label: _label("$totalContributor"),
+      label: _label("$totalContributors"),
     );
   }
 
