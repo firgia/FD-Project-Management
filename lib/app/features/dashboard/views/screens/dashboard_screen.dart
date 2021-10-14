@@ -1,5 +1,6 @@
 library dashboard;
 
+import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/task_card.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
@@ -27,9 +28,33 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           children: const [
             Spacer(),
-            TaskCard(type: TaskType.todo),
-            TaskCard(type: TaskType.inProgress),
-            TaskCard(type: TaskType.done),
+            TaskCard(
+              type: TaskType.todo,
+              profilContributors: [
+                AssetImage(ImageRasterPath.avatar1),
+                AssetImage(ImageRasterPath.avatar2),
+                AssetImage(ImageRasterPath.avatar3),
+                AssetImage(ImageRasterPath.avatar4),
+              ],
+            ),
+            TaskCard(
+              type: TaskType.inProgress,
+              profilContributors: [
+                AssetImage(ImageRasterPath.avatar5),
+                AssetImage(ImageRasterPath.avatar6),
+                AssetImage(ImageRasterPath.avatar7),
+                AssetImage(ImageRasterPath.avatar8),
+              ],
+            ),
+            TaskCard(
+              type: TaskType.done,
+              profilContributors: [
+                AssetImage(ImageRasterPath.avatar5),
+                AssetImage(ImageRasterPath.avatar3),
+                AssetImage(ImageRasterPath.avatar4),
+                AssetImage(ImageRasterPath.avatar2),
+              ],
+            ),
             Card(
               child: Padding(
                 padding: EdgeInsets.all(20),

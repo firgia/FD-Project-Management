@@ -5,8 +5,13 @@ import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({required this.type, Key? key}) : super(key: key);
+  const TaskCard({
+    required this.type,
+    required this.profilContributors,
+    Key? key,
+  }) : super(key: key);
 
+  final List<ImageProvider> profilContributors;
   final TaskType type;
 
   @override
@@ -27,6 +32,32 @@ class TaskCard extends StatelessWidget {
                 title: "Landing page UI Design",
                 subtitle: "Due in 6 days",
                 onPressedMore: () {},
+              ),
+            ),
+            const SizedBox(height: kSpacing),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      primary: type.getColor(),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      type.toStringValue(),
+                    ),
+                  ),
+                  _ListProfilImage(
+                    images: profilContributors,
+                    onPressed: () {},
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: kSpacing),
@@ -178,6 +209,69 @@ class _IconButton extends StatelessWidget {
       iconData,
       color: Colors.white54,
       size: 14,
+    );
+  }
+}
+
+class _ListProfilImage extends StatelessWidget {
+  const _ListProfilImage({
+    required this.images,
+    this.onPressed,
+    Key? key,
+  }) : super(key: key);
+
+  final List<ImageProvider> images;
+
+  final Function()? onPressed;
+  final _maxImages = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.centerRight,
+      children: _getLimitImage(images, _maxImages)
+          .asMap()
+          .entries
+          .map(
+            (e) => Padding(
+              padding: EdgeInsets.only(right: (e.key * 25.0)),
+              child: _image(
+                e.value,
+                onPressed: onPressed,
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  List<ImageProvider> _getLimitImage(List<ImageProvider> images, int limit) {
+    if (images.length <= limit) {
+      return images;
+    } else {
+      List<ImageProvider> result = [];
+      for (int i = 0; i < limit; i++) {
+        result.add(images[i]);
+      }
+      return result;
+    }
+  }
+
+  Widget _image(ImageProvider image, {Function()? onPressed}) {
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.all(1),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Theme.of(Get.context!).cardColor,
+        ),
+        child: CircleAvatar(
+          backgroundImage: image,
+          radius: 15,
+        ),
+      ),
     );
   }
 }
