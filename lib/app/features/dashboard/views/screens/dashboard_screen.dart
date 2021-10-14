@@ -1,6 +1,9 @@
 library dashboard;
 
-import '../../../../shared_components/header_text.dart';
+import 'package:project_management/app/constans/app_constants.dart';
+import 'package:project_management/app/shared_components/task_card.dart';
+import 'package:project_management/app/utils/helpers/app_helpers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,12 +27,56 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            ElevatedButton(onPressed: () {}, child: const Text("button")),
-            const Card(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: HeaderText("dashboard"),
-              ),
+            TaskCard(
+              title: "Landing page UI Design",
+              dueDay: 2,
+              totalComents: 50,
+              totalContributors: 34,
+              type: TaskType.todo,
+              profilContributors: const [
+                AssetImage(ImageRasterPath.avatar1),
+                AssetImage(ImageRasterPath.avatar2),
+                AssetImage(ImageRasterPath.avatar3),
+                AssetImage(ImageRasterPath.avatar4),
+              ],
+              onPressedMore: () {},
+              onPressedTask: () {},
+              onPressedContributors: () {},
+              onPressedComments: () {},
+            ),
+            TaskCard(
+              title: "Landing page UI Design",
+              dueDay: -1,
+              totalComents: 50,
+              totalContributors: 34,
+              type: TaskType.inProgress,
+              profilContributors: const [
+                AssetImage(ImageRasterPath.avatar5),
+                AssetImage(ImageRasterPath.avatar6),
+                AssetImage(ImageRasterPath.avatar7),
+                AssetImage(ImageRasterPath.avatar8),
+              ],
+              onPressedMore: () {},
+              onPressedTask: () {},
+              onPressedContributors: () {},
+              onPressedComments: () {},
+            ),
+            TaskCard(
+              title: "Landing page UI Design",
+              dueDay: 1,
+              totalComents: 50,
+              totalContributors: 34,
+              type: TaskType.done,
+              profilContributors: const [
+                AssetImage(ImageRasterPath.avatar5),
+                AssetImage(ImageRasterPath.avatar3),
+                AssetImage(ImageRasterPath.avatar4),
+                AssetImage(ImageRasterPath.avatar2),
+              ],
+              onPressedMore: () {},
+              onPressedTask: () {},
+              onPressedContributors: () {},
+              onPressedComments: () {},
             ),
             const Spacer(),
           ],
