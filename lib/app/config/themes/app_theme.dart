@@ -11,10 +11,11 @@ class AppTheme {
         primaryColorBrightness: Brightness.dark,
         primarySwatch: Colors.deepPurple,
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            primary: const Color.fromRGBO(128, 109, 255, 1),
-          ),
-        ),
+            style: ElevatedButton.styleFrom(
+          primary: const Color.fromRGBO(128, 109, 255, 1),
+        ).merge(
+          ButtonStyle(elevation: MaterialStateProperty.all(0)),
+        )),
         canvasColor: const Color.fromRGBO(31, 29, 44, 1),
         cardColor: const Color.fromRGBO(38, 40, 55, 1),
       );

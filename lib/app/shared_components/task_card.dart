@@ -53,7 +53,6 @@ class TaskCard extends StatelessWidget {
                 onPressedMore: onPressedMore,
               ),
             ),
-            const SizedBox(height: kSpacing),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: kSpacing),
               child: Row(
@@ -79,7 +78,7 @@ class TaskCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: kSpacing),
+            const SizedBox(height: kSpacing / 2),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
               child: Row(
@@ -202,7 +201,6 @@ class _IconButton extends StatelessWidget {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
         primary: Colors.transparent,
-        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
         ),

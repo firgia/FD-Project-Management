@@ -32,6 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.3.8
+  intl: ^0.17.0
+  percent_indicator: ^3.4.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
