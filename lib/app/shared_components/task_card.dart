@@ -105,6 +105,7 @@ class TaskCard extends StatelessWidget {
   }
 }
 
+/* -----------------------------> COMPONENTS <------------------------------ */
 class _Tile extends StatelessWidget {
   const _Tile({
     required this.dotColor,

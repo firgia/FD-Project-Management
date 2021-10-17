@@ -23,19 +23,22 @@ class ProjectCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _progressIndicator(
-          percent,
-          center: _profilImage(projectImage),
+        _ProgressIndicator(
+          percent: percent,
+          center: _ProfilImage(image: projectImage),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _title(projectName),
+              _TitleText(projectName),
               const SizedBox(height: 5),
               Row(
-                children: [_subtitle("Release time : "), _date(releaseTime)],
+                children: [
+                  const _SubtitleText("Release time : "),
+                  _ReleaseTimeText(releaseTime)
+                ],
               )
             ],
           ),
@@ -43,30 +46,57 @@ class ProjectCard extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _progressIndicator(double percent, {required Widget center}) {
+/* -----------------------------> COMPONENTS <------------------------------ */
+class _ProgressIndicator extends StatelessWidget {
+  const _ProgressIndicator({
+    required this.percent,
+    required this.center,
+    Key? key,
+  }) : super(key: key);
+
+  final double percent;
+  final Widget center;
+
+  @override
+  Widget build(BuildContext context) {
     return CircularPercentIndicator(
       radius: 55,
       lineWidth: 2.0,
-      percent: .8,
+      percent: percent,
       center: center,
       circularStrokeCap: CircularStrokeCap.round,
       backgroundColor: Colors.blueGrey,
       progressColor: Theme.of(Get.context!).primaryColor,
     );
   }
+}
 
-  Widget _profilImage(ImageProvider image) {
+class _ProfilImage extends StatelessWidget {
+  const _ProfilImage({required this.image, Key? key}) : super(key: key);
+
+  final ImageProvider image;
+
+  @override
+  Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundImage: projectImage,
+      backgroundImage: image,
       radius: 20,
       backgroundColor: Colors.white,
     );
   }
+}
 
-  Widget _title(String value) {
+class _TitleText extends StatelessWidget {
+  const _TitleText(this.data, {Key? key}) : super(key: key);
+
+  final String data;
+
+  @override
+  Widget build(BuildContext context) {
     return Text(
-      value.capitalize!,
+      data.capitalize!,
       style: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
@@ -77,17 +107,30 @@ class ProjectCard extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
   }
+}
 
-  Widget _subtitle(String value) {
+class _SubtitleText extends StatelessWidget {
+  const _SubtitleText(this.data, {Key? key}) : super(key: key);
+
+  final String data;
+  @override
+  Widget build(BuildContext context) {
     return Text(
-      value,
+      data,
       style: TextStyle(fontSize: 12, color: kFontColorPallets[2]),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
   }
+}
 
-  Widget _date(DateTime date) {
+class _ReleaseTimeText extends StatelessWidget {
+  const _ReleaseTimeText(this.date, {Key? key}) : super(key: key);
+
+  final DateTime date;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(Get.context!).cardColor,
@@ -95,7 +138,7 @@ class ProjectCard extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(5),
       child: Text(
-        DateFormat.yMMMd().format(releaseTime),
+        DateFormat.yMMMd().format(date),
         style: TextStyle(fontSize: 10, color: kFontColorPallets[1]),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,

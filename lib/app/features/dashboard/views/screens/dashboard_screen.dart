@@ -29,7 +29,7 @@ class DashboardScreen extends StatelessWidget {
           children: [
             const Spacer(),
             ProjectCard(
-              percent: 30,
+              percent: .3,
               projectImage: const AssetImage(ImageRasterPath.logo1),
               projectName: "Mobile Project Mobile Project Mobile Project",
               releaseTime: DateTime.now(),
