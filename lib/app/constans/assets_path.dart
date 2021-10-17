@@ -30,6 +30,10 @@ class ImageRasterPath {
   static const avatar6 = "$_folderPath/avatar-6.png";
   static const avatar7 = "$_folderPath/avatar-7.png";
   static const avatar8 = "$_folderPath/avatar-8.png";
+  static const logo1 = "$_folderPath/logo-1.png";
+  static const logo2 = "$_folderPath/logo-2.png";
+  static const logo3 = "$_folderPath/logo-3.png";
+  static const logo4 = "$_folderPath/logo-4.png";
 }
 
 class ImageVectorPath {

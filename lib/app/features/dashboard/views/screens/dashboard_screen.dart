@@ -1,6 +1,7 @@
 library dashboard;
 
 import 'package:project_management/app/constans/app_constants.dart';
+import 'package:project_management/app/shared_components/project_card.dart';
 import 'package:project_management/app/shared_components/task_card.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
@@ -27,6 +28,12 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
+            ProjectCard(
+              percent: .3,
+              projectImage: const AssetImage(ImageRasterPath.logo1),
+              projectName: "Mobile Project Mobile Project Mobile Project",
+              releaseTime: DateTime.now(),
+            ),
             TaskCard(
               title: "Landing page UI Design",
               dueDay: 2,
