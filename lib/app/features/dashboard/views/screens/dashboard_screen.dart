@@ -6,8 +6,10 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/card_upgrade_to_premium.dart';
 import 'package:project_management/app/shared_components/project_card.dart';
+import 'package:project_management/app/shared_components/search_field.dart';
 import 'package:project_management/app/shared_components/selection_button.dart';
 import 'package:project_management/app/shared_components/task_card.dart';
+import 'package:project_management/app/shared_components/today_text.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ part '../../controllers/dashboard_controller.dart';
 // model
 
 // component
+part '../components/header.dart';
 part '../components/sidebar.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -37,7 +40,10 @@ class DashboardScreen extends StatelessWidget {
             flex: 10,
             child: Column(
               children: [
-                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.all(kSpacing),
+                  child: _Header(),
+                ),
                 TaskCard(
                   title: "Landing page UI Design",
                   dueDay: 2,
