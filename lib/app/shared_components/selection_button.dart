@@ -45,15 +45,18 @@ class _SelectionButtonState extends State<SelectionButton> {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: widget.data.length,
-      itemBuilder: (context, index) => _Button(
-        selected: selected == index,
-        onPressed: () {
-          widget.onSelected(index, widget.data[index]);
-          setState(() {
-            selected = index;
-          });
-        },
-        data: widget.data[index],
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: _Button(
+          selected: selected == index,
+          onPressed: () {
+            widget.onSelected(index, widget.data[index]);
+            setState(() {
+              selected = index;
+            });
+          },
+          data: widget.data[index],
+        ),
       ),
     );
   }
@@ -131,7 +134,7 @@ class _Button extends StatelessWidget {
             width: 30,
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(74, 177, 120, 1),
+              color: kNotifColor,
               borderRadius: BorderRadius.circular(15),
             ),
             alignment: Alignment.center,
