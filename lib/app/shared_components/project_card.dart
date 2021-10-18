@@ -117,7 +117,7 @@ class _SubtitleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: TextStyle(fontSize: 12, color: kFontColorPallets[2]),
+      style: TextStyle(fontSize: 11, color: kFontColorPallets[2]),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
@@ -133,13 +133,13 @@ class _ReleaseTimeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(Get.context!).cardColor,
+        color: kNotifColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
       child: Text(
         DateFormat.yMMMd().format(date),
-        style: TextStyle(fontSize: 10, color: kFontColorPallets[1]),
+        style: const TextStyle(fontSize: 9, color: Colors.white),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
