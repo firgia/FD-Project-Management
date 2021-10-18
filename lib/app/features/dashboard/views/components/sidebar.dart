@@ -7,20 +7,20 @@ class _Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).cardColor,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(kSpacing),
-            child: ProjectCard(
-              percent: .3,
-              projectImage: const AssetImage(ImageRasterPath.logo1),
-              projectName: "Exon Project",
-              releaseTime: DateTime.now(),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(kSpacing),
+              child: ProjectCard(
+                percent: .3,
+                projectImage: const AssetImage(ImageRasterPath.logo1),
+                projectName: "Marketplace Mobile",
+                releaseTime: DateTime.now(),
+              ),
             ),
-          ),
-          const Divider(thickness: 1),
-          Expanded(
-            child: SelectionButton(
+            const Divider(thickness: 1),
+            SelectionButton(
               data: [
                 SelectionButtonData(
                   activeIcon: EvaIcons.grid,
@@ -58,8 +58,15 @@ class _Sidebar extends StatelessWidget {
                 log("index : $index | label : ${value.label}");
               },
             ),
-          ),
-        ],
+            const Divider(thickness: 1),
+            const SizedBox(height: kSpacing * 2),
+            CardUpgradeToPremium(
+              backgroundColor: Theme.of(context).canvasColor.withOpacity(.4),
+              onPressed: () {},
+            ),
+            const SizedBox(height: kSpacing),
+          ],
+        ),
       ),
     );
   }

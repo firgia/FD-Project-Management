@@ -43,21 +43,25 @@ class _SelectionButtonState extends State<SelectionButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.data.length,
-      itemBuilder: (context, index) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: _Button(
-          selected: selected == index,
-          onPressed: () {
-            widget.onSelected(index, widget.data[index]);
-            setState(() {
-              selected = index;
-            });
-          },
-          data: widget.data[index],
-        ),
-      ),
+    return Column(
+      children: widget.data.asMap().entries.map((e) {
+        final index = e.key;
+        final data = e.value;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: _Button(
+            selected: selected == index,
+            onPressed: () {
+              widget.onSelected(index, data);
+              setState(() {
+                selected = index;
+              });
+            },
+            data: data,
+          ),
+        );
+      }).toList(),
     );
   }
 }
