@@ -20,6 +20,7 @@ class SearchField extends StatelessWidget {
         ),
         prefixIcon: const Icon(EvaIcons.search),
         hintText: "search..",
+        isDense: true,
         fillColor: Theme.of(context).cardColor,
       ),
       onEditingComplete: () {

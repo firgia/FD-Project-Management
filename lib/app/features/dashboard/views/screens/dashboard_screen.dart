@@ -9,6 +9,7 @@ import 'package:project_management/app/shared_components/project_card.dart';
 import 'package:project_management/app/shared_components/search_field.dart';
 import 'package:project_management/app/shared_components/selection_button.dart';
 import 'package:project_management/app/shared_components/task_card.dart';
+import 'package:project_management/app/shared_components/today_text.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ part '../../controllers/dashboard_controller.dart';
 // model
 
 // component
+part '../components/header.dart';
 part '../components/sidebar.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -38,10 +40,9 @@ class DashboardScreen extends StatelessWidget {
             flex: 10,
             child: Column(
               children: [
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SearchField(),
+                const Padding(
+                  padding: EdgeInsets.all(kSpacing),
+                  child: _Header(),
                 ),
                 TaskCard(
                   title: "Landing page UI Design",
