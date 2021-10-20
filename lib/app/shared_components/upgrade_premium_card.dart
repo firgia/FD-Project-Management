@@ -3,10 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 
-class CardUpgradeToPremium extends StatelessWidget {
-  const CardUpgradeToPremium(
-      {this.backgroundColor, required this.onPressed, Key? key})
-      : super(key: key);
+class UpgradePremiumCard extends StatelessWidget {
+  const UpgradePremiumCard({
+    required this.onPressed,
+    this.backgroundColor,
+    Key? key,
+  }) : super(key: key);
 
   final Color? backgroundColor;
   final Function() onPressed;

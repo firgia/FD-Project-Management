@@ -4,7 +4,8 @@ import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
-import 'package:project_management/app/shared_components/card_upgrade_to_premium.dart';
+import 'package:project_management/app/shared_components/progress_card.dart';
+import 'package:project_management/app/shared_components/upgrade_premium_card.dart';
 import 'package:project_management/app/shared_components/project_card.dart';
 import 'package:project_management/app/shared_components/search_field.dart';
 import 'package:project_management/app/shared_components/selection_button.dart';
@@ -37,68 +38,92 @@ class DashboardScreen extends StatelessWidget {
         children: [
           const Flexible(flex: 3, child: _Sidebar()),
           Flexible(
-            flex: 10,
+            flex: 9,
             child: Column(
               children: [
                 const Padding(
                   padding: EdgeInsets.all(kSpacing),
                   child: _Header(),
                 ),
-                TaskCard(
-                  title: "Landing page UI Design",
-                  dueDay: 2,
-                  totalComents: 50,
-                  totalContributors: 34,
-                  type: TaskType.todo,
-                  profilContributors: const [
-                    AssetImage(ImageRasterPath.avatar1),
-                    AssetImage(ImageRasterPath.avatar2),
-                    AssetImage(ImageRasterPath.avatar3),
-                    AssetImage(ImageRasterPath.avatar4),
+                Row(
+                  children: [
+                    Flexible(
+                      flex: 5,
+                      child: ProgressCard(
+                        totalUndone: 10,
+                        totalTaskInProress: 2,
+                        onPressedCheck: () {},
+                      ),
+                    ),
+                    Flexible(
+                      flex: 4,
+                      child: ProgressCard(
+                        totalTaskInProress: 30,
+                        totalUndone: 2,
+                        onPressedCheck: () {},
+                      ),
+                    ),
                   ],
-                  onPressedMore: () {},
-                  onPressedTask: () {},
-                  onPressedContributors: () {},
-                  onPressedComments: () {},
                 ),
-                TaskCard(
-                  title: "Landing page UI Design",
-                  dueDay: -1,
-                  totalComents: 50,
-                  totalContributors: 34,
-                  type: TaskType.inProgress,
-                  profilContributors: const [
-                    AssetImage(ImageRasterPath.avatar5),
-                    AssetImage(ImageRasterPath.avatar6),
-                    AssetImage(ImageRasterPath.avatar7),
-                    AssetImage(ImageRasterPath.avatar8),
+                Wrap(
+                  children: [
+                    TaskCard(
+                      title: "Landing page UI Design",
+                      dueDay: 2,
+                      totalComents: 50,
+                      totalContributors: 34,
+                      type: TaskType.todo,
+                      profilContributors: const [
+                        AssetImage(ImageRasterPath.avatar1),
+                        AssetImage(ImageRasterPath.avatar2),
+                        AssetImage(ImageRasterPath.avatar3),
+                        AssetImage(ImageRasterPath.avatar4),
+                      ],
+                      onPressedMore: () {},
+                      onPressedTask: () {},
+                      onPressedContributors: () {},
+                      onPressedComments: () {},
+                    ),
+                    TaskCard(
+                      title: "Landing page UI Design",
+                      dueDay: -1,
+                      totalComents: 50,
+                      totalContributors: 34,
+                      type: TaskType.inProgress,
+                      profilContributors: const [
+                        AssetImage(ImageRasterPath.avatar5),
+                        AssetImage(ImageRasterPath.avatar6),
+                        AssetImage(ImageRasterPath.avatar7),
+                        AssetImage(ImageRasterPath.avatar8),
+                      ],
+                      onPressedMore: () {},
+                      onPressedTask: () {},
+                      onPressedContributors: () {},
+                      onPressedComments: () {},
+                    ),
+                    TaskCard(
+                      title: "Landing page UI Design",
+                      dueDay: 1,
+                      totalComents: 50,
+                      totalContributors: 34,
+                      type: TaskType.done,
+                      profilContributors: const [
+                        AssetImage(ImageRasterPath.avatar5),
+                        AssetImage(ImageRasterPath.avatar3),
+                        AssetImage(ImageRasterPath.avatar4),
+                        AssetImage(ImageRasterPath.avatar2),
+                      ],
+                      onPressedMore: () {},
+                      onPressedTask: () {},
+                      onPressedContributors: () {},
+                      onPressedComments: () {},
+                    ),
                   ],
-                  onPressedMore: () {},
-                  onPressedTask: () {},
-                  onPressedContributors: () {},
-                  onPressedComments: () {},
-                ),
-                TaskCard(
-                  title: "Landing page UI Design",
-                  dueDay: 1,
-                  totalComents: 50,
-                  totalContributors: 34,
-                  type: TaskType.done,
-                  profilContributors: const [
-                    AssetImage(ImageRasterPath.avatar5),
-                    AssetImage(ImageRasterPath.avatar3),
-                    AssetImage(ImageRasterPath.avatar4),
-                    AssetImage(ImageRasterPath.avatar2),
-                  ],
-                  onPressedMore: () {},
-                  onPressedTask: () {},
-                  onPressedContributors: () {},
-                  onPressedComments: () {},
-                ),
-                const Spacer(),
+                )
               ],
             ),
           ),
+          Flexible(flex: 4, child: Container())
         ],
       ),
     );
