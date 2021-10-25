@@ -35,7 +35,8 @@ class _TeamMember extends StatelessWidget {
         const Spacer(),
         IconButton(
           onPressed: onPressedAdd,
-          icon: const Icon(Icons.add_circle),
+          icon: const Icon(EvaIcons.plus),
+          tooltip: "add member",
         )
       ],
     );

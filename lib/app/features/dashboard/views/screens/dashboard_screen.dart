@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
+import 'package:project_management/app/shared_components/chatting_card.dart';
 import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
 import 'package:project_management/app/shared_components/progress_report_card.dart';
@@ -32,6 +33,7 @@ part '../components/active_project_card.dart';
 part '../components/header.dart';
 part '../components/overview_header.dart';
 part '../components/profile_tile.dart';
+part '../components/recent_messages.dart';
 part '../components/sidebar.dart';
 part '../components/team_member.dart';
 
@@ -79,6 +81,11 @@ class DashboardScreen extends GetView<DashboardController> {
                   _buildTeamMember(
                     data: controller.getMember(),
                     onPressedAdd: () {},
+                  ),
+                  const SizedBox(height: kSpacing),
+                  _buildRecentMessages(
+                    data: controller.getChatting(),
+                    onPressedMore: () {},
                   ),
                 ],
               ),
@@ -199,5 +206,23 @@ class DashboardScreen extends GetView<DashboardController> {
         ],
       ),
     );
+  }
+
+  Widget _buildRecentMessages({
+    required List<ChattingCardData> data,
+    required Function() onPressedMore,
+  }) {
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+        child: _RecentMessages(onPressedMore: () {}),
+      ),
+      const SizedBox(height: kSpacing / 2),
+      ...data
+          .map(
+            (e) => ChattingCard(data: e, onPressed: onPressedMore),
+          )
+          .toList(),
+    ]);
   }
 }
