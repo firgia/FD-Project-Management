@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
+import 'package:project_management/app/shared_components/chatting_card.dart';
 import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
 import 'package:project_management/app/shared_components/progress_report_card.dart';
@@ -79,6 +80,17 @@ class DashboardScreen extends GetView<DashboardController> {
                   _buildTeamMember(
                     data: controller.getMember(),
                     onPressedAdd: () {},
+                  ),
+                  ChattingCard(
+                    data: const ChattingCardData(
+                      image: AssetImage(ImageRasterPath.avatar1),
+                      isOnline: false,
+                      name: "firgia",
+                      lastMessage: "hay..",
+                      isRead: false,
+                      totalUnread: 19,
+                    ),
+                    onPressed: () {},
                   ),
                 ],
               ),
