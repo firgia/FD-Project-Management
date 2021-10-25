@@ -22,6 +22,7 @@ class ProgressReportCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(kSpacing),
+      height: 200,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
