@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
+import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
 import 'package:project_management/app/shared_components/progress_report_card.dart';
 import 'package:project_management/app/shared_components/upgrade_premium_card.dart';
@@ -32,6 +33,7 @@ part '../components/header.dart';
 part '../components/overview_header.dart';
 part '../components/profile_tile.dart';
 part '../components/sidebar.dart';
+part '../components/team_member.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -68,9 +70,15 @@ class DashboardScreen extends GetView<DashboardController> {
               child: Column(
                 children: [
                   const SizedBox(height: kSpacing / 2),
-                  _ProfilTile(
+                  _buildProfile(
                     data: controller.getProfil(),
                     onPressedNotification: () {},
+                  ),
+                  const Divider(thickness: 1),
+                  const SizedBox(height: kSpacing),
+                  _buildTeamMember(
+                    data: controller.getMember(),
+                    onPressedAdd: () {},
                   ),
                 ],
               ),
@@ -156,6 +164,39 @@ class DashboardScreen extends GetView<DashboardController> {
       child: _ActiveProjectCard(
         onPressedSeeAll: () {},
         data: data,
+      ),
+    );
+  }
+
+  Widget _buildProfile({
+    required _Profile data,
+    required Function() onPressedNotification,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+      child: _ProfilTile(
+        data: data,
+        onPressedNotification: onPressedNotification,
+      ),
+    );
+  }
+
+  Widget _buildTeamMember({
+    required List<ImageProvider> data,
+    required Function() onPressedAdd,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _TeamMember(
+            totalMember: data.length,
+            onPressedAdd: onPressedAdd,
+          ),
+          const SizedBox(height: kSpacing / 2),
+          ListProfilImage(maxImages: 6, images: data),
+        ],
       ),
     );
   }

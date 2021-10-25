@@ -85,4 +85,15 @@ class DashboardController extends GetxController {
       ),
     ];
   }
+
+  List<ImageProvider> getMember() {
+    return const [
+      AssetImage(ImageRasterPath.avatar1),
+      AssetImage(ImageRasterPath.avatar2),
+      AssetImage(ImageRasterPath.avatar3),
+      AssetImage(ImageRasterPath.avatar4),
+      AssetImage(ImageRasterPath.avatar5),
+      AssetImage(ImageRasterPath.avatar6),
+    ];
+  }
 }

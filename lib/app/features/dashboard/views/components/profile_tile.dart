@@ -11,6 +11,7 @@ class _ProfilTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.all(0),
       leading: CircleAvatar(backgroundImage: data.photo),
       title: Text(
         data.name,
