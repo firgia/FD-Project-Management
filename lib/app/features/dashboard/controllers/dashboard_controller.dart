@@ -2,6 +2,14 @@ part of dashboard;
 
 class DashboardController extends GetxController {
   // Data
+  _Profile getProfil() {
+    return const _Profile(
+      photo: AssetImage(ImageRasterPath.avatar1),
+      name: "Firgia",
+      email: "flutterwithgia@gmail.com",
+    );
+  }
+
   List<TaskCardData> getAllTask() {
     return [
       const TaskCardData(
@@ -75,6 +83,17 @@ class DashboardController extends GetxController {
         projectName: "Video Converter App",
         releaseTime: DateTime.now().add(const Duration(days: 100)),
       ),
+    ];
+  }
+
+  List<ImageProvider> getMember() {
+    return const [
+      AssetImage(ImageRasterPath.avatar1),
+      AssetImage(ImageRasterPath.avatar2),
+      AssetImage(ImageRasterPath.avatar3),
+      AssetImage(ImageRasterPath.avatar4),
+      AssetImage(ImageRasterPath.avatar5),
+      AssetImage(ImageRasterPath.avatar6),
     ];
   }
 }

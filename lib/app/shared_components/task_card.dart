@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_management/app/constans/app_constants.dart';
+import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 class TaskCardData {
@@ -80,7 +81,7 @@ class TaskCard extends StatelessWidget {
                       data.type.toStringValue(),
                     ),
                   ),
-                  _ListProfilImage(
+                  ListProfilImage(
                     images: data.profilContributors,
                     onPressed: onPressedContributors,
                   ),
@@ -235,69 +236,6 @@ class _IconButton extends StatelessWidget {
       iconData,
       color: Colors.white54,
       size: 14,
-    );
-  }
-}
-
-class _ListProfilImage extends StatelessWidget {
-  const _ListProfilImage({
-    required this.images,
-    this.onPressed,
-    Key? key,
-  }) : super(key: key);
-
-  final List<ImageProvider> images;
-
-  final Function()? onPressed;
-  final _maxImages = 3;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.centerRight,
-      children: _getLimitImage(images, _maxImages)
-          .asMap()
-          .entries
-          .map(
-            (e) => Padding(
-              padding: EdgeInsets.only(right: (e.key * 25.0)),
-              child: _image(
-                e.value,
-                onPressed: onPressed,
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  List<ImageProvider> _getLimitImage(List<ImageProvider> images, int limit) {
-    if (images.length <= limit) {
-      return images;
-    } else {
-      List<ImageProvider> result = [];
-      for (int i = 0; i < limit; i++) {
-        result.add(images[i]);
-      }
-      return result;
-    }
-  }
-
-  Widget _image(ImageProvider image, {Function()? onPressed}) {
-    return InkWell(
-      onTap: onPressed,
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        padding: const EdgeInsets.all(1),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Theme.of(Get.context!).cardColor,
-        ),
-        child: CircleAvatar(
-          backgroundImage: image,
-          radius: 15,
-        ),
-      ),
     );
   }
 }
