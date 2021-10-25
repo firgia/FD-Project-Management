@@ -4,19 +4,27 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 
-class ProjectCard extends StatelessWidget {
-  const ProjectCard({
-    required this.projectImage,
-    required this.projectName,
-    required this.releaseTime,
-    required this.percent,
-    Key? key,
-  }) : super(key: key);
-
+class ProjectCardData {
   final double percent;
   final ImageProvider projectImage;
   final String projectName;
   final DateTime releaseTime;
+
+  const ProjectCardData({
+    required this.projectImage,
+    required this.projectName,
+    required this.releaseTime,
+    required this.percent,
+  });
+}
+
+class ProjectCard extends StatelessWidget {
+  const ProjectCard({
+    required this.data,
+    Key? key,
+  }) : super(key: key);
+
+  final ProjectCardData data;
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +32,20 @@ class ProjectCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _ProgressIndicator(
-          percent: percent,
-          center: _ProfilImage(image: projectImage),
+          percent: data.percent,
+          center: _ProfilImage(image: data.projectImage),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _TitleText(projectName),
+              _TitleText(data.projectName),
               const SizedBox(height: 5),
               Row(
                 children: [
                   const _SubtitleText("Release time : "),
-                  _ReleaseTimeText(releaseTime)
+                  _ReleaseTimeText(data.releaseTime)
                 ],
               )
             ],

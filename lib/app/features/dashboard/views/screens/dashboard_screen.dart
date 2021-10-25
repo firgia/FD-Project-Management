@@ -23,10 +23,8 @@ part '../../bindings/dashboard_binding.dart';
 // controller
 part '../../controllers/dashboard_controller.dart';
 
-// model
-part '../../models/task.dart';
-
 // component
+part '../components/active_project_card.dart';
 part '../components/header.dart';
 part '../components/overview_header.dart';
 part '../components/sidebar.dart';
@@ -52,6 +50,9 @@ class DashboardScreen extends GetView<DashboardController> {
                   _buildProgress(),
                   const SizedBox(height: kSpacing * 2),
                   _buildTaskOverview(data: controller.getAllTask()),
+                  const SizedBox(height: kSpacing * 2),
+                  _buildActiveProject(data: controller.getActiveProject()),
+                  const SizedBox(height: kSpacing),
                 ],
               ),
             ),
@@ -77,8 +78,10 @@ class DashboardScreen extends GetView<DashboardController> {
           Flexible(
             flex: 5,
             child: ProgressCard(
-              totalUndone: 10,
-              totalTaskInProress: 2,
+              data: const ProgressCardData(
+                totalUndone: 10,
+                totalTaskInProress: 2,
+              ),
               onPressedCheck: () {},
             ),
           ),
@@ -86,11 +89,13 @@ class DashboardScreen extends GetView<DashboardController> {
           const Flexible(
             flex: 4,
             child: ProgressReportCard(
-              title: "1st Sprint",
-              doneTask: 5,
-              percent: .3,
-              task: 3,
-              undoneTask: 2,
+              data: ProgressReportCardData(
+                title: "1st Sprint",
+                doneTask: 5,
+                percent: .3,
+                task: 3,
+                undoneTask: 2,
+              ),
             ),
           ),
         ],
@@ -98,9 +103,7 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildTaskOverview({
-    required List<_Task> data,
-  }) {
+  Widget _buildTaskOverview({required List<TaskCardData> data}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: Column(
@@ -114,12 +117,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 .map(
                   (e) => Expanded(
                     child: TaskCard(
-                      title: e.title,
-                      dueDay: e.dueDay,
-                      totalComents: e.totalComments,
-                      totalContributors: e.totalContributors,
-                      type: e.type,
-                      profilContributors: e.profilContributors,
+                      data: e,
                       onPressedMore: () {},
                       onPressedTask: () {},
                       onPressedContributors: () {},
@@ -130,6 +128,16 @@ class DashboardScreen extends GetView<DashboardController> {
                 .toList(),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildActiveProject({required List<ProjectCardData> data}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+      child: _ActiveProjectCard(
+        onPressedSeeAll: () {},
+        data: data,
       ),
     );
   }

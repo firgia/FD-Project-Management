@@ -2,16 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 
-class ProgressCard extends StatelessWidget {
-  const ProgressCard({
+class ProgressCardData {
+  final int totalUndone;
+  final int totalTaskInProress;
+
+  const ProgressCardData({
     required this.totalUndone,
     required this.totalTaskInProress,
+  });
+}
+
+class ProgressCard extends StatelessWidget {
+  const ProgressCard({
+    required this.data,
     required this.onPressedCheck,
     Key? key,
   }) : super(key: key);
 
-  final int totalUndone;
-  final int totalTaskInProress;
+  final ProgressCardData data;
   final Function() onPressedCheck;
 
   @override
@@ -48,11 +56,11 @@ class ProgressCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "You Have $totalUndone Undone Tasks",
+                  "You Have ${data.totalUndone} Undone Tasks",
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  "$totalTaskInProress Tasks are in progress",
+                  "${data.totalTaskInProress} Tasks are in progress",
                   style: TextStyle(color: kFontColorPallets[1]),
                 ),
                 const SizedBox(height: kSpacing),

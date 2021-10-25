@@ -13,10 +13,12 @@ class _Sidebar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(kSpacing),
               child: ProjectCard(
-                percent: .3,
-                projectImage: const AssetImage(ImageRasterPath.logo1),
-                projectName: "Marketplace Mobile",
-                releaseTime: DateTime.now(),
+                data: ProjectCardData(
+                  percent: .3,
+                  projectImage: const AssetImage(ImageRasterPath.logo1),
+                  projectName: "Marketplace Mobile",
+                  releaseTime: DateTime.now(),
+                ),
               ),
             ),
             const Divider(thickness: 1),
