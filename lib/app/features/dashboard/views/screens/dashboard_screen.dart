@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
+import 'package:project_management/app/shared_components/progress_report_card.dart';
 import 'package:project_management/app/shared_components/upgrade_premium_card.dart';
 import 'package:project_management/app/shared_components/project_card.dart';
 import 'package:project_management/app/shared_components/search_field.dart';
@@ -55,12 +56,14 @@ class DashboardScreen extends StatelessWidget {
                         onPressedCheck: () {},
                       ),
                     ),
-                    Flexible(
+                    const Flexible(
                       flex: 4,
-                      child: ProgressCard(
-                        totalTaskInProress: 30,
-                        totalUndone: 2,
-                        onPressedCheck: () {},
+                      child: ProgressReportCard(
+                        title: "1st Sprint",
+                        doneTask: 5,
+                        percent: .3,
+                        task: 3,
+                        undoneTask: 2,
                       ),
                     ),
                   ],
