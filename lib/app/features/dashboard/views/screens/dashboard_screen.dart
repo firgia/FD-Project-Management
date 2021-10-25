@@ -39,7 +39,10 @@ class DashboardScreen extends GetView<DashboardController> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Flexible(flex: 3, child: _Sidebar()),
+            Flexible(
+              flex: 3,
+              child: _Sidebar(data: controller.getSelectedProject()),
+            ),
             Flexible(
               flex: 9,
               child: Column(

@@ -46,25 +46,34 @@ class DashboardController extends GetxController {
     ];
   }
 
+  ProjectCardData getSelectedProject() {
+    return ProjectCardData(
+      percent: .3,
+      projectImage: const AssetImage(ImageRasterPath.logo1),
+      projectName: "Marketplace Mobile",
+      releaseTime: DateTime.now(),
+    );
+  }
+
   List<ProjectCardData> getActiveProject() {
     return [
       ProjectCardData(
         percent: .3,
-        projectImage: const AssetImage(ImageRasterPath.logo1),
-        projectName: "Marketplace Mobile",
-        releaseTime: DateTime.now(),
+        projectImage: const AssetImage(ImageRasterPath.logo2),
+        projectName: "Taxi Online",
+        releaseTime: DateTime.now().add(const Duration(days: 130)),
       ),
       ProjectCardData(
-        percent: .3,
-        projectImage: const AssetImage(ImageRasterPath.logo1),
-        projectName: "Marketplace Mobile",
-        releaseTime: DateTime.now(),
+        percent: .5,
+        projectImage: const AssetImage(ImageRasterPath.logo3),
+        projectName: "E-Movies Mobile",
+        releaseTime: DateTime.now().add(const Duration(days: 140)),
       ),
       ProjectCardData(
-        percent: .3,
-        projectImage: const AssetImage(ImageRasterPath.logo1),
-        projectName: "Marketplace Mobile",
-        releaseTime: DateTime.now(),
+        percent: .8,
+        projectImage: const AssetImage(ImageRasterPath.logo4),
+        projectName: "Video Converter App",
+        releaseTime: DateTime.now().add(const Duration(days: 100)),
       ),
     ];
   }
