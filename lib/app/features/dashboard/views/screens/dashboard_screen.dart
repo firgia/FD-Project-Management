@@ -27,6 +27,7 @@ part '../../controllers/dashboard_controller.dart';
 
 // component
 part '../components/header.dart';
+part '../components/overview_header.dart';
 part '../components/sidebar.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -42,93 +43,119 @@ class DashboardScreen extends StatelessWidget {
             flex: 9,
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(kSpacing),
-                  child: _Header(),
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 5,
-                      child: ProgressCard(
-                        totalUndone: 10,
-                        totalTaskInProress: 2,
-                        onPressedCheck: () {},
-                      ),
-                    ),
-                    const Flexible(
-                      flex: 4,
-                      child: ProgressReportCard(
-                        title: "1st Sprint",
-                        doneTask: 5,
-                        percent: .3,
-                        task: 3,
-                        undoneTask: 2,
-                      ),
-                    ),
-                  ],
-                ),
-                Wrap(
-                  children: [
-                    TaskCard(
-                      title: "Landing page UI Design",
-                      dueDay: 2,
-                      totalComents: 50,
-                      totalContributors: 34,
-                      type: TaskType.todo,
-                      profilContributors: const [
-                        AssetImage(ImageRasterPath.avatar1),
-                        AssetImage(ImageRasterPath.avatar2),
-                        AssetImage(ImageRasterPath.avatar3),
-                        AssetImage(ImageRasterPath.avatar4),
-                      ],
-                      onPressedMore: () {},
-                      onPressedTask: () {},
-                      onPressedContributors: () {},
-                      onPressedComments: () {},
-                    ),
-                    TaskCard(
-                      title: "Landing page UI Design",
-                      dueDay: -1,
-                      totalComents: 50,
-                      totalContributors: 34,
-                      type: TaskType.inProgress,
-                      profilContributors: const [
-                        AssetImage(ImageRasterPath.avatar5),
-                        AssetImage(ImageRasterPath.avatar6),
-                        AssetImage(ImageRasterPath.avatar7),
-                        AssetImage(ImageRasterPath.avatar8),
-                      ],
-                      onPressedMore: () {},
-                      onPressedTask: () {},
-                      onPressedContributors: () {},
-                      onPressedComments: () {},
-                    ),
-                    TaskCard(
-                      title: "Landing page UI Design",
-                      dueDay: 1,
-                      totalComents: 50,
-                      totalContributors: 34,
-                      type: TaskType.done,
-                      profilContributors: const [
-                        AssetImage(ImageRasterPath.avatar5),
-                        AssetImage(ImageRasterPath.avatar3),
-                        AssetImage(ImageRasterPath.avatar4),
-                        AssetImage(ImageRasterPath.avatar2),
-                      ],
-                      onPressedMore: () {},
-                      onPressedTask: () {},
-                      onPressedContributors: () {},
-                      onPressedComments: () {},
-                    ),
-                  ],
-                )
+                _buildHeader(),
+                _buildProgress(),
+                _buildTaskOverview(),
               ],
             ),
           ),
           Flexible(flex: 4, child: Container())
         ],
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return const Padding(
+      padding: EdgeInsets.all(kSpacing),
+      child: _Header(),
+    );
+  }
+
+  Widget _buildProgress() {
+    return Padding(
+      padding: const EdgeInsets.all(kSpacing),
+      child: Row(
+        children: [
+          Flexible(
+            flex: 5,
+            child: ProgressCard(
+              totalUndone: 10,
+              totalTaskInProress: 2,
+              onPressedCheck: () {},
+            ),
+          ),
+          const SizedBox(width: kSpacing / 2),
+          const Flexible(
+            flex: 4,
+            child: ProgressReportCard(
+              title: "1st Sprint",
+              doneTask: 5,
+              percent: .3,
+              task: 3,
+              undoneTask: 2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTaskOverview() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+          child: _OverviewHeader(
+            onSelected: (p0) {},
+          ),
+        ),
+        Wrap(
+          children: [
+            TaskCard(
+              title: "Landing page UI Design",
+              dueDay: 2,
+              totalComents: 50,
+              totalContributors: 34,
+              type: TaskType.todo,
+              profilContributors: const [
+                AssetImage(ImageRasterPath.avatar1),
+                AssetImage(ImageRasterPath.avatar2),
+                AssetImage(ImageRasterPath.avatar3),
+                AssetImage(ImageRasterPath.avatar4),
+              ],
+              onPressedMore: () {},
+              onPressedTask: () {},
+              onPressedContributors: () {},
+              onPressedComments: () {},
+            ),
+            TaskCard(
+              title: "Landing page UI Design",
+              dueDay: -1,
+              totalComents: 50,
+              totalContributors: 34,
+              type: TaskType.inProgress,
+              profilContributors: const [
+                AssetImage(ImageRasterPath.avatar5),
+                AssetImage(ImageRasterPath.avatar6),
+                AssetImage(ImageRasterPath.avatar7),
+                AssetImage(ImageRasterPath.avatar8),
+              ],
+              onPressedMore: () {},
+              onPressedTask: () {},
+              onPressedContributors: () {},
+              onPressedComments: () {},
+            ),
+            TaskCard(
+              title: "Landing page UI Design",
+              dueDay: 1,
+              totalComents: 50,
+              totalContributors: 34,
+              type: TaskType.done,
+              profilContributors: const [
+                AssetImage(ImageRasterPath.avatar5),
+                AssetImage(ImageRasterPath.avatar3),
+                AssetImage(ImageRasterPath.avatar4),
+                AssetImage(ImageRasterPath.avatar2),
+              ],
+              onPressedMore: () {},
+              onPressedTask: () {},
+              onPressedContributors: () {},
+              onPressedComments: () {},
+            ),
+          ],
+        )
+      ],
     );
   }
 }
