@@ -158,7 +158,6 @@ class _Tile extends StatelessWidget {
   Widget _title(String data) {
     return Text(
       data,
-      style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: .7),
       textAlign: TextAlign.left,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
