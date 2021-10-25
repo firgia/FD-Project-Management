@@ -33,6 +33,7 @@ part '../components/active_project_card.dart';
 part '../components/header.dart';
 part '../components/overview_header.dart';
 part '../components/profile_tile.dart';
+part '../components/recent_messages.dart';
 part '../components/sidebar.dart';
 part '../components/team_member.dart';
 
@@ -81,16 +82,10 @@ class DashboardScreen extends GetView<DashboardController> {
                     data: controller.getMember(),
                     onPressedAdd: () {},
                   ),
-                  ChattingCard(
-                    data: const ChattingCardData(
-                      image: AssetImage(ImageRasterPath.avatar1),
-                      isOnline: false,
-                      name: "firgia",
-                      lastMessage: "hay..",
-                      isRead: false,
-                      totalUnread: 19,
-                    ),
-                    onPressed: () {},
+                  const SizedBox(height: kSpacing),
+                  _buildRecentMessages(
+                    data: controller.getChatting(),
+                    onPressedMore: () {},
                   ),
                 ],
               ),
@@ -211,5 +206,23 @@ class DashboardScreen extends GetView<DashboardController> {
         ],
       ),
     );
+  }
+
+  Widget _buildRecentMessages({
+    required List<ChattingCardData> data,
+    required Function() onPressedMore,
+  }) {
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+        child: _RecentMessages(onPressedMore: () {}),
+      ),
+      const SizedBox(height: kSpacing / 2),
+      ...data
+          .map(
+            (e) => ChattingCard(data: e, onPressed: onPressedMore),
+          )
+          .toList(),
+    ]);
   }
 }

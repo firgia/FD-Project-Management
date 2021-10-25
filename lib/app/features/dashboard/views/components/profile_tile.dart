@@ -15,17 +15,16 @@ class _ProfilTile extends StatelessWidget {
       leading: CircleAvatar(backgroundImage: data.photo),
       title: Text(
         data.name,
-        style: TextStyle(fontSize: 13, color: kFontColorPallets[0]),
+        style: TextStyle(fontSize: 14, color: kFontColorPallets[0]),
       ),
       subtitle: Text(
         data.email,
-        style: TextStyle(fontSize: 11, color: kFontColorPallets[2]),
+        style: TextStyle(fontSize: 12, color: kFontColorPallets[2]),
       ),
       trailing: IconButton(
         onPressed: onPressedNotification,
-        iconSize: 20,
-        splashRadius: 20,
-        icon: const Icon(Icons.notifications_outlined),
+        icon: const Icon(EvaIcons.bellOutline),
+        tooltip: "notification",
       ),
     );
   }
