@@ -2,6 +2,14 @@ part of dashboard;
 
 class DashboardController extends GetxController {
   // Data
+  _Profile getProfil() {
+    return const _Profile(
+      photo: AssetImage(ImageRasterPath.avatar1),
+      name: "Firgia",
+      email: "flutterwithgia@gmail.com",
+    );
+  }
+
   List<TaskCardData> getAllTask() {
     return [
       const TaskCardData(

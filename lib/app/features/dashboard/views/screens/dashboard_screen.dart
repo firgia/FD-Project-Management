@@ -23,10 +23,14 @@ part '../../bindings/dashboard_binding.dart';
 // controller
 part '../../controllers/dashboard_controller.dart';
 
+// models
+part '../../models/profile.dart';
+
 // component
 part '../components/active_project_card.dart';
 part '../components/header.dart';
 part '../components/overview_header.dart';
+part '../components/profile_tile.dart';
 part '../components/sidebar.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
@@ -59,7 +63,18 @@ class DashboardScreen extends GetView<DashboardController> {
                 ],
               ),
             ),
-            Flexible(flex: 4, child: Container())
+            Flexible(
+              flex: 4,
+              child: Column(
+                children: [
+                  const SizedBox(height: kSpacing / 2),
+                  _ProfilTile(
+                    data: controller.getProfil(),
+                    onPressedNotification: () {},
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
