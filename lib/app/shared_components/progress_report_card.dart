@@ -2,21 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 
-class ProgressReportCard extends StatelessWidget {
-  const ProgressReportCard({
-    required this.percent,
-    required this.title,
-    required this.task,
-    required this.doneTask,
-    required this.undoneTask,
-    Key? key,
-  }) : super(key: key);
-
+class ProgressReportCardData {
   final double percent;
   final String title;
   final int task;
   final int doneTask;
   final int undoneTask;
+
+  const ProgressReportCardData({
+    required this.percent,
+    required this.title,
+    required this.task,
+    required this.doneTask,
+    required this.undoneTask,
+  });
+}
+
+class ProgressReportCard extends StatelessWidget {
+  const ProgressReportCard({
+    required this.data,
+    Key? key,
+  }) : super(key: key);
+
+  final ProgressReportCardData data;
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +47,22 @@ class ProgressReportCard extends StatelessWidget {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                title,
+                data.title,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 15),
-              _RichText(value1: "$task ", value2: "Task"),
+              _RichText(value1: "${data.task} ", value2: "Task"),
               const SizedBox(height: 3),
-              _RichText(value1: "$doneTask ", value2: "Done Task"),
+              _RichText(value1: "${data.doneTask} ", value2: "Done Task"),
               const SizedBox(height: 3),
-              _RichText(value1: "$undoneTask ", value2: "Undone Task"),
+              _RichText(value1: "${data.undoneTask} ", value2: "Undone Task"),
             ],
           ),
           const Spacer(),
-          _Indicator(percent: percent),
+          _Indicator(percent: data.percent),
         ],
       ),
     );

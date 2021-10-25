@@ -4,14 +4,27 @@ import 'package:get/get.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
-class TaskCard extends StatelessWidget {
-  const TaskCard({
+class TaskCardData {
+  final String title;
+  final int dueDay;
+  final List<ImageProvider> profilContributors;
+  final TaskType type;
+  final int totalComments;
+  final int totalContributors;
+
+  const TaskCardData({
     required this.title,
     required this.dueDay,
-    required this.totalComents,
+    required this.totalComments,
     required this.totalContributors,
     required this.type,
     required this.profilContributors,
+  });
+}
+
+class TaskCard extends StatelessWidget {
+  const TaskCard({
+    required this.data,
     required this.onPressedMore,
     required this.onPressedTask,
     required this.onPressedContributors,
@@ -19,12 +32,7 @@ class TaskCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final String title;
-  final int dueDay;
-  final List<ImageProvider> profilContributors;
-  final TaskType type;
-  final int totalComents;
-  final int totalContributors;
+  final TaskCardData data;
 
   final Function() onPressedMore;
   final Function() onPressedTask;
@@ -45,11 +53,12 @@ class TaskCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5),
               child: _Tile(
-                dotColor: type.getColor(),
-                title: title,
-                subtitle: (dueDay < 0)
-                    ? "Late in ${dueDay * -1} days"
-                    : "Due in " + ((dueDay > 1) ? "$dueDay days" : "today"),
+                dotColor: data.type.getColor(),
+                title: data.title,
+                subtitle: (data.dueDay < 0)
+                    ? "Late in ${data.dueDay * -1} days"
+                    : "Due in " +
+                        ((data.dueDay > 1) ? "${data.dueDay} days" : "today"),
                 onPressedMore: onPressedMore,
               ),
             ),
@@ -61,18 +70,18 @@ class TaskCard extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      primary: type.getColor(),
+                      primary: data.type.getColor(),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     onPressed: onPressedTask,
                     child: Text(
-                      type.toStringValue(),
+                      data.type.toStringValue(),
                     ),
                   ),
                   _ListProfilImage(
-                    images: profilContributors,
+                    images: data.profilContributors,
                     onPressed: onPressedContributors,
                   ),
                 ],
@@ -86,13 +95,13 @@ class TaskCard extends StatelessWidget {
                   _IconButton(
                     iconData: EvaIcons.messageCircleOutline,
                     onPressed: onPressedComments,
-                    totalContributors: totalComents,
+                    totalContributors: data.totalComments,
                   ),
                   const SizedBox(width: kSpacing / 2),
                   _IconButton(
                     iconData: EvaIcons.peopleOutline,
                     onPressed: onPressedContributors,
-                    totalContributors: totalContributors,
+                    totalContributors: data.totalContributors,
                   ),
                 ],
               ),

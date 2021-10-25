@@ -1,7 +1,12 @@
 part of dashboard;
 
 class _Sidebar extends StatelessWidget {
-  const _Sidebar({Key? key}) : super(key: key);
+  const _Sidebar({
+    required this.data,
+    Key? key,
+  }) : super(key: key);
+
+  final ProjectCardData data;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +18,7 @@ class _Sidebar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(kSpacing),
               child: ProjectCard(
-                percent: .3,
-                projectImage: const AssetImage(ImageRasterPath.logo1),
-                projectName: "Marketplace Mobile",
-                releaseTime: DateTime.now(),
+                data: data,
               ),
             ),
             const Divider(thickness: 1),
