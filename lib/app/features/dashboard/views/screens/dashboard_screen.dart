@@ -24,47 +24,54 @@ part '../../bindings/dashboard_binding.dart';
 part '../../controllers/dashboard_controller.dart';
 
 // model
+part '../../models/task.dart';
 
 // component
 part '../components/header.dart';
 part '../components/overview_header.dart';
 part '../components/sidebar.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        children: [
-          const Flexible(flex: 3, child: _Sidebar()),
-          Flexible(
-            flex: 9,
-            child: Column(
-              children: [
-                _buildHeader(),
-                _buildProgress(),
-                _buildTaskOverview(),
-              ],
+      body: SingleChildScrollView(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Flexible(flex: 3, child: _Sidebar()),
+            Flexible(
+              flex: 9,
+              child: Column(
+                children: [
+                  const SizedBox(height: kSpacing),
+                  _buildHeader(),
+                  const SizedBox(height: kSpacing * 2),
+                  _buildProgress(),
+                  const SizedBox(height: kSpacing * 2),
+                  _buildTaskOverview(data: controller.getAllTask()),
+                ],
+              ),
             ),
-          ),
-          Flexible(flex: 4, child: Container())
-        ],
+            Flexible(flex: 4, child: Container())
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildHeader() {
     return const Padding(
-      padding: EdgeInsets.all(kSpacing),
+      padding: EdgeInsets.symmetric(horizontal: kSpacing),
       child: _Header(),
     );
   }
 
   Widget _buildProgress() {
     return Padding(
-      padding: const EdgeInsets.all(kSpacing),
+      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: Row(
         children: [
           Flexible(
@@ -91,71 +98,39 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTaskOverview() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-          child: _OverviewHeader(
+  Widget _buildTaskOverview({
+    required List<_Task> data,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+      child: Column(
+        children: [
+          _OverviewHeader(
             onSelected: (p0) {},
           ),
-        ),
-        Wrap(
-          children: [
-            TaskCard(
-              title: "Landing page UI Design",
-              dueDay: 2,
-              totalComents: 50,
-              totalContributors: 34,
-              type: TaskType.todo,
-              profilContributors: const [
-                AssetImage(ImageRasterPath.avatar1),
-                AssetImage(ImageRasterPath.avatar2),
-                AssetImage(ImageRasterPath.avatar3),
-                AssetImage(ImageRasterPath.avatar4),
-              ],
-              onPressedMore: () {},
-              onPressedTask: () {},
-              onPressedContributors: () {},
-              onPressedComments: () {},
-            ),
-            TaskCard(
-              title: "Landing page UI Design",
-              dueDay: -1,
-              totalComents: 50,
-              totalContributors: 34,
-              type: TaskType.inProgress,
-              profilContributors: const [
-                AssetImage(ImageRasterPath.avatar5),
-                AssetImage(ImageRasterPath.avatar6),
-                AssetImage(ImageRasterPath.avatar7),
-                AssetImage(ImageRasterPath.avatar8),
-              ],
-              onPressedMore: () {},
-              onPressedTask: () {},
-              onPressedContributors: () {},
-              onPressedComments: () {},
-            ),
-            TaskCard(
-              title: "Landing page UI Design",
-              dueDay: 1,
-              totalComents: 50,
-              totalContributors: 34,
-              type: TaskType.done,
-              profilContributors: const [
-                AssetImage(ImageRasterPath.avatar5),
-                AssetImage(ImageRasterPath.avatar3),
-                AssetImage(ImageRasterPath.avatar4),
-                AssetImage(ImageRasterPath.avatar2),
-              ],
-              onPressedMore: () {},
-              onPressedTask: () {},
-              onPressedContributors: () {},
-              onPressedComments: () {},
-            ),
-          ],
-        )
-      ],
+          const SizedBox(height: kSpacing),
+          Row(
+            children: data
+                .map(
+                  (e) => Expanded(
+                    child: TaskCard(
+                      title: e.title,
+                      dueDay: e.dueDay,
+                      totalComents: e.totalComments,
+                      totalContributors: e.totalContributors,
+                      type: e.type,
+                      profilContributors: e.profilContributors,
+                      onPressedMore: () {},
+                      onPressedTask: () {},
+                      onPressedContributors: () {},
+                      onPressedComments: () {},
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      ),
     );
   }
 }
