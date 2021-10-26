@@ -6,7 +6,7 @@ class _OverviewHeader extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final Function(TaskType?) onSelected;
+  final Function(TaskType? task) onSelected;
 
   @override
   Widget build(BuildContext context) {

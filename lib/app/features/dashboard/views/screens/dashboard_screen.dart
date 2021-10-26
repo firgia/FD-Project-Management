@@ -141,7 +141,7 @@ class DashboardScreen extends GetView<DashboardController> {
       child: Column(
         children: [
           _OverviewHeader(
-            onSelected: (p0) {},
+            onSelected: (task) {},
           ),
           const SizedBox(height: kSpacing),
           Row(
