@@ -100,12 +100,12 @@ class DashboardController extends GetxController {
   List<ChattingCardData> getChatting() {
     return const [
       ChattingCardData(
-        image: AssetImage(ImageRasterPath.avatar2),
+        image: AssetImage(ImageRasterPath.avatar6),
         isOnline: true,
-        name: "Susi",
+        name: "Samantha",
         lastMessage: "i added my new tasks",
         isRead: false,
-        totalUnread: 19,
+        totalUnread: 100,
       ),
       ChattingCardData(
         image: AssetImage(ImageRasterPath.avatar3),
@@ -122,14 +122,6 @@ class DashboardController extends GetxController {
         lastMessage: "we'll have a meeting at 9AM",
         isRead: false,
         totalUnread: 1,
-      ),
-      ChattingCardData(
-        image: AssetImage(ImageRasterPath.avatar5),
-        isOnline: false,
-        name: "Samantha",
-        lastMessage: "sure, i will",
-        isRead: false,
-        totalUnread: 100,
       ),
     ];
   }

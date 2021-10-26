@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/chatting_card.dart';
+import 'package:project_management/app/shared_components/get_premium_card.dart';
 import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
 import 'package:project_management/app/shared_components/progress_report_card.dart';
@@ -72,21 +73,19 @@ class DashboardScreen extends GetView<DashboardController> {
               child: Column(
                 children: [
                   const SizedBox(height: kSpacing / 2),
-                  _buildProfile(
-                    data: controller.getProfil(),
-                    onPressedNotification: () {},
-                  ),
+                  _buildProfile(data: controller.getProfil()),
                   const Divider(thickness: 1),
                   const SizedBox(height: kSpacing),
-                  _buildTeamMember(
-                    data: controller.getMember(),
-                    onPressedAdd: () {},
+                  _buildTeamMember(data: controller.getMember()),
+                  const SizedBox(height: kSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+                    child: GetPremiumCard(onPressed: () {}),
                   ),
                   const SizedBox(height: kSpacing),
-                  _buildRecentMessages(
-                    data: controller.getChatting(),
-                    onPressedMore: () {},
-                  ),
+                  const Divider(thickness: 1),
+                  const SizedBox(height: kSpacing),
+                  _buildRecentMessages(data: controller.getChatting()),
                 ],
               ),
             )
@@ -175,23 +174,17 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildProfile({
-    required _Profile data,
-    required Function() onPressedNotification,
-  }) {
+  Widget _buildProfile({required _Profile data}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: _ProfilTile(
         data: data,
-        onPressedNotification: onPressedNotification,
+        onPressedNotification: () {},
       ),
     );
   }
 
-  Widget _buildTeamMember({
-    required List<ImageProvider> data,
-    required Function() onPressedAdd,
-  }) {
+  Widget _buildTeamMember({required List<ImageProvider> data}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: Column(
@@ -199,7 +192,7 @@ class DashboardScreen extends GetView<DashboardController> {
         children: [
           _TeamMember(
             totalMember: data.length,
-            onPressedAdd: onPressedAdd,
+            onPressedAdd: () {},
           ),
           const SizedBox(height: kSpacing / 2),
           ListProfilImage(maxImages: 6, images: data),
@@ -208,10 +201,7 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildRecentMessages({
-    required List<ChattingCardData> data,
-    required Function() onPressedMore,
-  }) {
+  Widget _buildRecentMessages({required List<ChattingCardData> data}) {
     return Column(children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: kSpacing),
@@ -220,7 +210,7 @@ class DashboardScreen extends GetView<DashboardController> {
       const SizedBox(height: kSpacing / 2),
       ...data
           .map(
-            (e) => ChattingCard(data: e, onPressed: onPressedMore),
+            (e) => ChattingCard(data: e, onPressed: () {}),
           )
           .toList(),
     ]);
