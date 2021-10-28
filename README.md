@@ -6,6 +6,7 @@
 
 This dashboard page is designed for the project management web. This design contains task managers, recent messages, progress reports, profile member, premium card, etc.
 
+Responsive design (for mobile & tablet) is coming soon.
 
 ![wall](https://user-images.githubusercontent.com/89120990/139288993-9cfed071-29a9-46cd-9ea2-cfc92b6ceb7e.png)
 
