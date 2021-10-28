@@ -1,16 +1,19 @@
-# project_management
+# Project Management
 
-A new Flutter project.
+## [Watch it on YouTube](https://youtu.be/VAIwqG7e3n8)
 
-## Getting Started
+### Dashboard Screen
 
-This project is a starting point for a Flutter application.
+This dashboard page is designed for the project management web. This design contains task managers, recent messages, progress reports, profile member, premium card, etc.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![wall](https://user-images.githubusercontent.com/89120990/139288993-9cfed071-29a9-46cd-9ea2-cfc92b6ceb7e.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+**Dependencies:**
+
+- [eva_icons_flutter](https://pub.dev/packages/eva_icons_flutter)
+- [percent_indicator](https://pub.dev/packages/percent_indicator)
+- [get](https://pub.dev/packages/get)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
