@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Project Management',
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.basic,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
