@@ -54,8 +54,63 @@ class DashboardScreen extends GetView<DashboardController> {
           );
         },
         tabletBuilder: (context, constraints) {
-          return const Center(
-            child: Text("Tablet"),
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                flex: 9,
+                child: Column(
+                  children: [
+                    const SizedBox(height: kSpacing),
+                    _buildHeader(),
+                    const SizedBox(height: kSpacing * 2),
+                    _buildProgress(),
+                    const SizedBox(height: kSpacing * 2),
+                    _buildTaskOverview(
+                      data: controller.getAllTask(),
+                      crossAxisCount: 6,
+                      crossAxisCellCount: (constraints.maxWidth < 950)
+                          ? 6
+                          : (constraints.maxWidth < 1100)
+                              ? 3
+                              : 2,
+                    ),
+                    const SizedBox(height: kSpacing * 2),
+                    _buildActiveProject(
+                      data: controller.getActiveProject(),
+                      crossAxisCount: 6,
+                      crossAxisCellCount: (constraints.maxWidth < 950)
+                          ? 6
+                          : (constraints.maxWidth < 1100)
+                              ? 3
+                              : 2,
+                    ),
+                    const SizedBox(height: kSpacing),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 4,
+                child: Column(
+                  children: [
+                    const SizedBox(height: kSpacing / 2),
+                    _buildProfile(data: controller.getProfil()),
+                    const Divider(thickness: 1),
+                    const SizedBox(height: kSpacing),
+                    _buildTeamMember(data: controller.getMember()),
+                    const SizedBox(height: kSpacing),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+                      child: GetPremiumCard(onPressed: () {}),
+                    ),
+                    const SizedBox(height: kSpacing),
+                    const Divider(thickness: 1),
+                    const SizedBox(height: kSpacing),
+                    _buildRecentMessages(data: controller.getChatting()),
+                  ],
+                ),
+              )
+            ],
           );
         },
         desktopBuilder: (context, constraints) {
