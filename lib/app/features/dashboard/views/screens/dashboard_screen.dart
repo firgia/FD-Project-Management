@@ -46,6 +46,10 @@ class DashboardScreen extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: controller.scaffoldKey,
+      drawer: (ResponsiveBuilder.isDesktop(context))
+          ? null
+          : Drawer(child: _Sidebar(data: controller.getSelectedProject())),
       body: SingleChildScrollView(
           child: ResponsiveBuilder(
         mobileBuilder: (context, constraints) {
@@ -62,7 +66,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 child: Column(
                   children: [
                     const SizedBox(height: kSpacing),
-                    _buildHeader(),
+                    _buildHeader(onPressedMenu: () => controller.openDrawer()),
                     const SizedBox(height: kSpacing * 2),
                     _buildProgress(),
                     const SizedBox(height: kSpacing * 2),
@@ -178,10 +182,23 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildHeader() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: kSpacing),
-      child: _Header(),
+  Widget _buildHeader({Function()? onPressedMenu}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+      child: Row(
+        children: [
+          if (onPressedMenu != null)
+            Padding(
+              padding: const EdgeInsets.only(right: kSpacing),
+              child: IconButton(
+                onPressed: onPressedMenu,
+                icon: const Icon(EvaIcons.menu),
+                tooltip: "menu",
+              ),
+            ),
+          const Expanded(child: _Header()),
+        ],
+      ),
     );
   }
 
