@@ -39,13 +39,17 @@ class _OverviewHeader extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  children: _listButton(
-                    task: task.value,
-                    onSelected: (value) {
-                      task.value = value;
-                      onSelected(value);
-                    },
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  child: Row(
+                    children: _listButton(
+                      task: task.value,
+                      onSelected: (value) {
+                        task.value = value;
+                        onSelected(value);
+                      },
+                    ),
                   ),
                 ),
               ],
