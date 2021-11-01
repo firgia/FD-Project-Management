@@ -63,7 +63,7 @@ class DashboardScreen extends GetView<DashboardController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                flex: 3,
+                flex: (constraints.maxWidth < 1360) ? 4 : 3,
                 child: _Sidebar(data: controller.getSelectedProject()),
               ),
               Flexible(
@@ -76,10 +76,10 @@ class DashboardScreen extends GetView<DashboardController> {
                     _buildProgress(),
                     const SizedBox(height: kSpacing * 2),
                     _buildTaskOverview(
-                        data: controller.getAllTask(),
-                        crossAxisCount: 6,
-                        crossAxisCellCount:
-                            (constraints.maxWidth < 1360) ? 3 : 2),
+                      data: controller.getAllTask(),
+                      crossAxisCount: 6,
+                      crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
+                    ),
                     const SizedBox(height: kSpacing * 2),
                     _buildActiveProject(
                       data: controller.getActiveProject(),
