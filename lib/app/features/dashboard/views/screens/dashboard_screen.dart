@@ -62,13 +62,17 @@ class DashboardScreen extends GetView<DashboardController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                flex: 9,
+                flex: (constraints.maxWidth < 950) ? 7 : 9,
                 child: Column(
                   children: [
                     const SizedBox(height: kSpacing),
                     _buildHeader(onPressedMenu: () => controller.openDrawer()),
                     const SizedBox(height: kSpacing * 2),
-                    _buildProgress(),
+                    _buildProgress(
+                      axis: (constraints.maxWidth < 950)
+                          ? Axis.vertical
+                          : Axis.horizontal,
+                    ),
                     const SizedBox(height: kSpacing * 2),
                     _buildTaskOverview(
                       data: controller.getAllTask(),
@@ -202,36 +206,58 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildProgress() {
+  Widget _buildProgress({Axis axis = Axis.horizontal}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: Row(
-        children: [
-          Flexible(
-            flex: 5,
-            child: ProgressCard(
-              data: const ProgressCardData(
-                totalUndone: 10,
-                totalTaskInProress: 2,
-              ),
-              onPressedCheck: () {},
+      child: (axis == Axis.horizontal)
+          ? Row(
+              children: [
+                Flexible(
+                  flex: 5,
+                  child: ProgressCard(
+                    data: const ProgressCardData(
+                      totalUndone: 10,
+                      totalTaskInProress: 2,
+                    ),
+                    onPressedCheck: () {},
+                  ),
+                ),
+                const SizedBox(width: kSpacing / 2),
+                const Flexible(
+                  flex: 4,
+                  child: ProgressReportCard(
+                    data: ProgressReportCardData(
+                      title: "1st Sprint",
+                      doneTask: 5,
+                      percent: .3,
+                      task: 3,
+                      undoneTask: 2,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                ProgressCard(
+                  data: const ProgressCardData(
+                    totalUndone: 10,
+                    totalTaskInProress: 2,
+                  ),
+                  onPressedCheck: () {},
+                ),
+                const SizedBox(height: kSpacing / 2),
+                const ProgressReportCard(
+                  data: ProgressReportCardData(
+                    title: "1st Sprint",
+                    doneTask: 5,
+                    percent: .3,
+                    task: 3,
+                    undoneTask: 2,
+                  ),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(width: kSpacing / 2),
-          const Flexible(
-            flex: 4,
-            child: ProgressReportCard(
-              data: ProgressReportCardData(
-                title: "1st Sprint",
-                doneTask: 5,
-                percent: .3,
-                task: 3,
-                undoneTask: 2,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
