@@ -3,12 +3,14 @@ library dashboard;
 import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/chatting_card.dart';
 import 'package:project_management/app/shared_components/get_premium_card.dart';
 import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
 import 'package:project_management/app/shared_components/progress_report_card.dart';
+import 'package:project_management/app/shared_components/responsive_builder.dart';
 import 'package:project_management/app/shared_components/upgrade_premium_card.dart';
 import 'package:project_management/app/shared_components/project_card.dart';
 import 'package:project_management/app/shared_components/search_field.dart';
@@ -45,53 +47,79 @@ class DashboardScreen extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              flex: 3,
-              child: _Sidebar(data: controller.getSelectedProject()),
-            ),
-            Flexible(
-              flex: 9,
-              child: Column(
-                children: [
-                  const SizedBox(height: kSpacing),
-                  _buildHeader(),
-                  const SizedBox(height: kSpacing * 2),
-                  _buildProgress(),
-                  const SizedBox(height: kSpacing * 2),
-                  _buildTaskOverview(data: controller.getAllTask()),
-                  const SizedBox(height: kSpacing * 2),
-                  _buildActiveProject(data: controller.getActiveProject()),
-                  const SizedBox(height: kSpacing),
-                ],
+          child: ResponsiveBuilder(
+        mobileBuilder: (context, constraints) {
+          return const Center(
+            child: Text("Mobile"),
+          );
+        },
+        tabletBuilder: (context, constraints) {
+          return const Center(
+            child: Text("Tablet"),
+          );
+        },
+        desktopBuilder: (context, constraints) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                flex: (constraints.maxWidth < 1360) ? 4 : 3,
+                child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(kBorderRadius),
+                      bottomRight: Radius.circular(kBorderRadius),
+                    ),
+                    child: _Sidebar(data: controller.getSelectedProject())),
               ),
-            ),
-            Flexible(
-              flex: 4,
-              child: Column(
-                children: [
-                  const SizedBox(height: kSpacing / 2),
-                  _buildProfile(data: controller.getProfil()),
-                  const Divider(thickness: 1),
-                  const SizedBox(height: kSpacing),
-                  _buildTeamMember(data: controller.getMember()),
-                  const SizedBox(height: kSpacing),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-                    child: GetPremiumCard(onPressed: () {}),
-                  ),
-                  const SizedBox(height: kSpacing),
-                  const Divider(thickness: 1),
-                  const SizedBox(height: kSpacing),
-                  _buildRecentMessages(data: controller.getChatting()),
-                ],
+              Flexible(
+                flex: 9,
+                child: Column(
+                  children: [
+                    const SizedBox(height: kSpacing),
+                    _buildHeader(),
+                    const SizedBox(height: kSpacing * 2),
+                    _buildProgress(),
+                    const SizedBox(height: kSpacing * 2),
+                    _buildTaskOverview(
+                      data: controller.getAllTask(),
+                      crossAxisCount: 6,
+                      crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
+                    ),
+                    const SizedBox(height: kSpacing * 2),
+                    _buildActiveProject(
+                      data: controller.getActiveProject(),
+                      crossAxisCount: 6,
+                      crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
+                    ),
+                    const SizedBox(height: kSpacing),
+                  ],
+                ),
               ),
-            )
-          ],
-        ),
-      ),
+              Flexible(
+                flex: 4,
+                child: Column(
+                  children: [
+                    const SizedBox(height: kSpacing / 2),
+                    _buildProfile(data: controller.getProfil()),
+                    const Divider(thickness: 1),
+                    const SizedBox(height: kSpacing),
+                    _buildTeamMember(data: controller.getMember()),
+                    const SizedBox(height: kSpacing),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+                      child: GetPremiumCard(onPressed: () {}),
+                    ),
+                    const SizedBox(height: kSpacing),
+                    const Divider(thickness: 1),
+                    const SizedBox(height: kSpacing),
+                    _buildRecentMessages(data: controller.getChatting()),
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+      )),
     );
   }
 
@@ -135,41 +163,60 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildTaskOverview({required List<TaskCardData> data}) {
-    return Padding(
+  Widget _buildTaskOverview({
+    required List<TaskCardData> data,
+    int crossAxisCount = 6,
+    int crossAxisCellCount = 2,
+  }) {
+    return StaggeredGridView.countBuilder(
+      crossAxisCount: crossAxisCount,
+      itemCount: data.length + 1,
+      addAutomaticKeepAlives: false,
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: Column(
-        children: [
-          _OverviewHeader(
-            onSelected: (task) {},
-          ),
-          const SizedBox(height: kSpacing),
-          Row(
-            children: data
-                .map(
-                  (e) => Expanded(
-                    child: TaskCard(
-                      data: e,
-                      onPressedMore: () {},
-                      onPressedTask: () {},
-                      onPressedContributors: () {},
-                      onPressedComments: () {},
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-        ],
-      ),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return (index == 0)
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: kSpacing),
+                child: _OverviewHeader(
+                  onSelected: (task) {},
+                ),
+              )
+            : TaskCard(
+                data: data[index - 1],
+                onPressedMore: () {},
+                onPressedTask: () {},
+                onPressedContributors: () {},
+                onPressedComments: () {},
+              );
+      },
+      staggeredTileBuilder: (int index) =>
+          StaggeredTile.fit((index == 0) ? crossAxisCount : crossAxisCellCount),
     );
   }
 
-  Widget _buildActiveProject({required List<ProjectCardData> data}) {
+  Widget _buildActiveProject({
+    required List<ProjectCardData> data,
+    int crossAxisCount = 6,
+    int crossAxisCellCount = 2,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: _ActiveProjectCard(
         onPressedSeeAll: () {},
-        data: data,
+        child: StaggeredGridView.countBuilder(
+          crossAxisCount: crossAxisCount,
+          itemCount: data.length,
+          addAutomaticKeepAlives: false,
+          mainAxisSpacing: kSpacing,
+          crossAxisSpacing: kSpacing,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return ProjectCard(data: data[index]);
+          },
+          staggeredTileBuilder: (int index) =>
+              StaggeredTile.fit(crossAxisCellCount),
+        ),
       ),
     );
   }
