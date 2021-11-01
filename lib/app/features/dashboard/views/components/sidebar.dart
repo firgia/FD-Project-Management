@@ -13,6 +13,7 @@ class _Sidebar extends StatelessWidget {
     return Container(
       color: Theme.of(context).cardColor,
       child: SingleChildScrollView(
+        controller: ScrollController(),
         child: Column(
           children: [
             Padding(

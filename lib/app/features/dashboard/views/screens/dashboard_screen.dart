@@ -21,6 +21,7 @@ import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 // binding
 part '../../bindings/dashboard_binding.dart';
@@ -49,13 +50,46 @@ class DashboardScreen extends GetView<DashboardController> {
       key: controller.scaffoldKey,
       drawer: (ResponsiveBuilder.isDesktop(context))
           ? null
-          : Drawer(child: _Sidebar(data: controller.getSelectedProject())),
+          : Drawer(
+              child: Padding(
+                padding: const EdgeInsets.only(top: kSpacing),
+                child: _Sidebar(data: controller.getSelectedProject()),
+              ),
+            ),
       body: SingleChildScrollView(
           child: ResponsiveBuilder(
         mobileBuilder: (context, constraints) {
-          return const Center(
-            child: Text("Mobile"),
-          );
+          return Column(children: [
+            const SizedBox(height: kSpacing * (kIsWeb ? 1 : 2)),
+            _buildHeader(onPressedMenu: () => controller.openDrawer()),
+            const SizedBox(height: kSpacing / 2),
+            const Divider(),
+            _buildProfile(data: controller.getProfil()),
+            const SizedBox(height: kSpacing),
+            _buildProgress(axis: Axis.vertical),
+            const SizedBox(height: kSpacing),
+            _buildTeamMember(data: controller.getMember()),
+            const SizedBox(height: kSpacing),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+              child: GetPremiumCard(onPressed: () {}),
+            ),
+            const SizedBox(height: kSpacing * 2),
+            _buildTaskOverview(
+              data: controller.getAllTask(),
+              headerAxis: Axis.vertical,
+              crossAxisCount: 6,
+              crossAxisCellCount: 6,
+            ),
+            const SizedBox(height: kSpacing * 2),
+            _buildActiveProject(
+              data: controller.getActiveProject(),
+              crossAxisCount: 6,
+              crossAxisCellCount: 6,
+            ),
+            const SizedBox(height: kSpacing),
+            _buildRecentMessages(data: controller.getChatting()),
+          ]);
         },
         tabletBuilder: (context, constraints) {
           return Row(
@@ -65,7 +99,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 flex: (constraints.maxWidth < 950) ? 6 : 9,
                 child: Column(
                   children: [
-                    const SizedBox(height: kSpacing),
+                    const SizedBox(height: kSpacing * (kIsWeb ? 1 : 2)),
                     _buildHeader(onPressedMenu: () => controller.openDrawer()),
                     const SizedBox(height: kSpacing * 2),
                     _buildProgress(
@@ -104,7 +138,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 flex: 4,
                 child: Column(
                   children: [
-                    const SizedBox(height: kSpacing / 2),
+                    const SizedBox(height: kSpacing * (kIsWeb ? 0.5 : 1.5)),
                     _buildProfile(data: controller.getProfil()),
                     const Divider(thickness: 1),
                     const SizedBox(height: kSpacing),
@@ -276,6 +310,7 @@ class DashboardScreen extends GetView<DashboardController> {
       addAutomaticKeepAlives: false,
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return (index == 0)
             ? Padding(
@@ -308,6 +343,7 @@ class DashboardScreen extends GetView<DashboardController> {
       child: _ActiveProjectCard(
         onPressedSeeAll: () {},
         child: StaggeredGridView.countBuilder(
+          physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: crossAxisCount,
           itemCount: data.length,
           addAutomaticKeepAlives: false,
