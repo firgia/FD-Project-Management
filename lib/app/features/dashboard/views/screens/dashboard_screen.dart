@@ -83,6 +83,8 @@ class DashboardScreen extends GetView<DashboardController> {
                     const SizedBox(height: kSpacing * 2),
                     _buildActiveProject(
                       data: controller.getActiveProject(),
+                      crossAxisCount: 6,
+                      crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
                     ),
                     const SizedBox(height: kSpacing),
                   ],
@@ -188,12 +190,28 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildActiveProject({required List<ProjectCardData> data}) {
+  Widget _buildActiveProject({
+    required List<ProjectCardData> data,
+    int crossAxisCount = 6,
+    int crossAxisCellCount = 2,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: _ActiveProjectCard(
         onPressedSeeAll: () {},
-        data: data,
+        child: StaggeredGridView.countBuilder(
+          crossAxisCount: crossAxisCount,
+          itemCount: data.length,
+          addAutomaticKeepAlives: false,
+          mainAxisSpacing: kSpacing,
+          crossAxisSpacing: kSpacing,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return ProjectCard(data: data[index]);
+          },
+          staggeredTileBuilder: (int index) =>
+              StaggeredTile.fit(crossAxisCellCount),
+        ),
       ),
     );
   }

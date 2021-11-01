@@ -2,12 +2,12 @@ part of dashboard;
 
 class _ActiveProjectCard extends StatelessWidget {
   const _ActiveProjectCard({
-    required this.data,
+    required this.child,
     required this.onPressedSeeAll,
     Key? key,
   }) : super(key: key);
 
-  final List<ProjectCardData> data;
+  final Widget child;
   final Function() onPressedSeeAll;
 
   @override
@@ -32,11 +32,7 @@ class _ActiveProjectCard extends StatelessWidget {
               height: kSpacing,
             ),
             const SizedBox(height: kSpacing),
-            Row(
-              children: data
-                  .map((e) => Expanded(child: ProjectCard(data: e)))
-                  .toList(),
-            )
+            child,
           ],
         ),
       ),
