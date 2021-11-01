@@ -16,10 +16,14 @@ class _ProfilTile extends StatelessWidget {
       title: Text(
         data.name,
         style: TextStyle(fontSize: 14, color: kFontColorPallets[0]),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
         data.email,
         style: TextStyle(fontSize: 12, color: kFontColorPallets[2]),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
       trailing: IconButton(
         onPressed: onPressedNotification,
