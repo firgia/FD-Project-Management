@@ -62,7 +62,7 @@ class DashboardScreen extends GetView<DashboardController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                flex: (constraints.maxWidth < 950) ? 7 : 9,
+                flex: (constraints.maxWidth < 950) ? 6 : 9,
                 child: Column(
                   children: [
                     const SizedBox(height: kSpacing),
@@ -76,6 +76,9 @@ class DashboardScreen extends GetView<DashboardController> {
                     const SizedBox(height: kSpacing * 2),
                     _buildTaskOverview(
                       data: controller.getAllTask(),
+                      headerAxis: (constraints.maxWidth < 850)
+                          ? Axis.vertical
+                          : Axis.horizontal,
                       crossAxisCount: 6,
                       crossAxisCellCount: (constraints.maxWidth < 950)
                           ? 6
@@ -265,6 +268,7 @@ class DashboardScreen extends GetView<DashboardController> {
     required List<TaskCardData> data,
     int crossAxisCount = 6,
     int crossAxisCellCount = 2,
+    Axis headerAxis = Axis.horizontal,
   }) {
     return StaggeredGridView.countBuilder(
       crossAxisCount: crossAxisCount,
@@ -277,6 +281,7 @@ class DashboardScreen extends GetView<DashboardController> {
             ? Padding(
                 padding: const EdgeInsets.only(bottom: kSpacing),
                 child: _OverviewHeader(
+                  axis: headerAxis,
                   onSelected: (task) {},
                 ),
               )
