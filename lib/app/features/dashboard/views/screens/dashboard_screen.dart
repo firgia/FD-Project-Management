@@ -3,6 +3,7 @@ library dashboard;
 import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/chatting_card.dart';
 import 'package:project_management/app/shared_components/get_premium_card.dart';
@@ -135,32 +136,35 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildTaskOverview({required List<TaskCardData> data}) {
-    return Padding(
+  Widget _buildTaskOverview({
+    required List<TaskCardData> data,
+    int crossAxisCount = 6,
+    int crossAxisCellCount = 2,
+  }) {
+    return StaggeredGridView.countBuilder(
+      crossAxisCount: crossAxisCount,
+      itemCount: data.length + 1,
+      addAutomaticKeepAlives: false,
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: Column(
-        children: [
-          _OverviewHeader(
-            onSelected: (task) {},
-          ),
-          const SizedBox(height: kSpacing),
-          Row(
-            children: data
-                .map(
-                  (e) => Expanded(
-                    child: TaskCard(
-                      data: e,
-                      onPressedMore: () {},
-                      onPressedTask: () {},
-                      onPressedContributors: () {},
-                      onPressedComments: () {},
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-        ],
-      ),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return (index == 0)
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: kSpacing),
+                child: _OverviewHeader(
+                  onSelected: (task) {},
+                ),
+              )
+            : TaskCard(
+                data: data[index - 1],
+                onPressedMore: () {},
+                onPressedTask: () {},
+                onPressedContributors: () {},
+                onPressedComments: () {},
+              );
+      },
+      staggeredTileBuilder: (int index) =>
+          StaggeredTile.fit((index == 0) ? crossAxisCount : crossAxisCellCount),
     );
   }
 
