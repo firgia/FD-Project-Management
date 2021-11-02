@@ -1,6 +1,6 @@
 # Project Management
 
-## [Watch it on YouTube](https://youtu.be/YgLRFITrqT8)
+## [Watch it on YouTube](https://www.youtube.com/playlist?list=PL90UioxEmIFEzvyMsk930RMsQ62BCYuLb)
 
 ### Dashboard Screen
 
@@ -15,3 +15,4 @@ This dashboard page is designed for the project management web. This design cont
 - [percent_indicator](https://pub.dev/packages/percent_indicator)
 - [get](https://pub.dev/packages/get)
 - [flutter_svg](https://pub.dev/packages/flutter_svg)
+- [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view)
