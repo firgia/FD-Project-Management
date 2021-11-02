@@ -35,6 +35,7 @@ dependencies:
   get: ^4.3.8
   intl: ^0.17.0
   percent_indicator: ^3.4.0
+  flutter_staggered_grid_view: ^0.4.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0
