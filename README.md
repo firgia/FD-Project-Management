@@ -4,7 +4,7 @@
 
 ### Dashboard Screen
 
-This dashboard page is designed for the project management web. This design contains task managers, recent messages, progress reports, profile member, premium card, etc.
+This dashboard page is designed for the project management. This design contains task managers, recent messages, progress reports, profile member, premium card, etc.
 
 ![thumbnail_wall](https://user-images.githubusercontent.com/89120990/139877331-ca4fe70d-0b61-4755-9039-1f5435cd9365.png)
 ![bg_mob2](https://user-images.githubusercontent.com/89120990/139874972-6828722c-92e2-47d3-bf35-1588f41f4637.gif)
