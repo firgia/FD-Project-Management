@@ -1,6 +1,6 @@
 # Project Management
 
-## [Watch it on YouTube](https://www.youtube.com/playlist?list=PL90UioxEmIFEzvyMsk930RMsQ62BCYuLb)
+## [Watch it on YouTube](https://youtu.be/YgLRFITrqT8)
 
 ### Dashboard Screen
 
