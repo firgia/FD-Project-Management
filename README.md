@@ -1,18 +1,21 @@
 # Project Management
 
-## [Watch it on YouTube](https://youtube.com/playlist?list=PL90UioxEmIFFTmKS2ixiqCqLUkbtAPmHN)
+## [Watch it on YouTube](https://youtu.be/YgLRFITrqT8)
 
 ### Dashboard Screen
 
-Sign in & Sign up with email using firebase is very easy, in this project I'll show you a sample of using email authentication using firebase and creating an attractive UI.
+This dashboard page is designed for the project management. This design contains task managers, recent messages, progress reports, profile member, premium card, etc.
 
-![thumbnail](https://user-images.githubusercontent.com/89120990/158010101-4d8bef75-fb51-4fd5-867c-d911bab0daf7.png)
+![thumbnail_wall](https://user-images.githubusercontent.com/89120990/139877331-ca4fe70d-0b61-4755-9039-1f5435cd9365.png)
+![bg_mob2](https://user-images.githubusercontent.com/89120990/139874972-6828722c-92e2-47d3-bf35-1588f41f4637.gif)
+![bg_tab](https://user-images.githubusercontent.com/89120990/139875104-347e5955-a555-452a-adab-25e159df221e.gif)
+![bg_desk(2)](https://user-images.githubusercontent.com/89120990/139876701-d746483a-a494-48a3-9a79-6d58536209b3.gif)
 
-**Note:**
-Before running this flutter project, you have to add or replace Google-Service.json file in android/app with your Firebase project and don't forget to enable your Email Authentication.
 
 **Dependencies:**
 
-- [firebase_auth](https://pub.dev/packages/firebase_auth)
-- [firebase_core](https://pub.dev/packages/firebase_core)
+- [eva_icons_flutter](https://pub.dev/packages/eva_icons_flutter)
+- [percent_indicator](https://pub.dev/packages/percent_indicator)
 - [get](https://pub.dev/packages/get)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
+- [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view)
